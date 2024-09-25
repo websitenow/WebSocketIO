@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="/static/cdn/socket.io.min.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <img src="/static/images/no-image.png" alt="">
+    <input id="text" type="text" width="300px" placeholder="insert text...">
+    <button id="sender">SEND</button>
+    <button id="inserter">INSERT</button>
+    <button id="OnOff">START/STOP</button>
+    <select id="selectTyp">
+        <option value="xpath">XPATH</option>
+        <option value="name">NAME</option>
+        <option value="text">TEXT</option>
+        <option value="id">ID</option>
+    </select>
+    <select id="locValue">
+        <option value="0">0</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="2">2</option>
+    </select>
+
+    <script>
+        const socket = io()
+
+        socket.on("message", (msg) => {
+            console.log("Server Response: ", msg);
+        })
+
+        socket.on("OnOff", (color) => {
+            OnOff.style.backgroundColor = color
+        })
+
+        document.getElementById("sender").addEventListener("click", () => {
+            const msg = document.getElementById("text").value
+            socket.send(msg)
+        })
+
+        document.getElementById("OnOff").addEventListener("click", () => {
+            socket.emit("OnOffBrowser")
+        })
+
+        document.getElementById("inserter").addEventListener("click", () => {
+            socket.emit("insert", {typ: selectTyp.value, text: text.value, loc: locValue.value})
+        })
+    </script>
+</body>
+
+</html>

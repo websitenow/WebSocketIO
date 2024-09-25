@@ -1,0 +1,14 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+#OnOff {
+    background-color: #f10e0e;
+}
+
+img {
+    width: 100%;
+    max-width: 500px;
+}
