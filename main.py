@@ -11,7 +11,7 @@ chrome_options.add_argument('--headless')
 chrome_options.add_argument('--no-sandbox')
 chrome_options.add_argument('--disable-dev-shm-usage')
 
-tweet_url = "https://x.com/i/flow/login"
+url = "https://google.com"
 driver = None
 
 CORS(app, resources={r"/*": {"origins": "*"}})
@@ -30,7 +30,7 @@ def OnOffBrowser():
         emit("OnOff", "#f10e0e", broadcast=False)
     else:
         driver = webdriver.Chrome(options=chrome_options)
-        driver.get(tweet_url)
+        driver.get(url)
         emit("OnOff", "#0ef119", broadcast=False)
 
 @socketio.on("message")
